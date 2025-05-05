@@ -1,0 +1,14 @@
+# ollama-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: automation
+  name: ollama
+spec:
+  selector:
+    app: ollama
+  ports:
+    - port: 80
+      targetPort: 11434
+      protocol: TCP
+  type: ClusterIP

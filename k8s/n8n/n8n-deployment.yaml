@@ -1,0 +1,44 @@
+# n8n-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: automation
+  name: n8n
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: n8n
+  template:
+    metadata:
+      labels:
+        app: n8n
+    spec:
+      serviceAccountName: n8n-sa
+      containers:
+        - name: n8n
+          image: n8nio/n8n
+          ports:
+            - containerPort: 5678
+          env:
+            - name: N8N_BASIC_AUTH_ACTIVE
+              value: "true"
+            - name: N8N_BASIC_AUTH_USER
+              value: "admin"
+            - name: N8N_BASIC_AUTH_PASSWORD
+              value: "password"
+            - name: N8N_HOST
+              value: "n8n.local"
+            - name: N8N_PORT
+              value: "5678"
+            - name: N8N_PROTOCOL
+              value: "http"
+            - name: N8N_SECURE_COOKIE
+              value: "false"
+          volumeMounts:
+            - name: n8n-storage
+              mountPath: /home/node/.n8n
+      volumes:
+        - name: n8n-storage
+          persistentVolumeClaim:
+            claimName: n8n-pvc

@@ -1,0 +1,7 @@
+# n8n-sa.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  namespace: automation
+  name: n8n-sa
+

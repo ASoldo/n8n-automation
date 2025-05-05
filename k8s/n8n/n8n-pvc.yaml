@@ -1,0 +1,12 @@
+# n8n-pv.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: automation
+  name: n8n-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
