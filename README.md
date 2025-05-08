@@ -110,5 +110,11 @@ Containers Usage Memory:
 ## Mount local files to Minikube and use them in n8n
 
 ```sh
- minikube mount /home/rootster/Documents/automations/:/automations
+ minikube mount /home/rootster/Documents/automations/:/automations/
+```
+
+or run this in the background:
+
+```sh
+ minikube mount /home/rootster/Documents/automations/:/automations/ &
 ```
