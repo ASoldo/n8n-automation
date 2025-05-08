@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wireguard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wireguard
+  template:
+    metadata:
+      labels:
+        app: wireguard
+    spec:
+      containers:
+        - name: wireguard
+          image: linuxserver/wireguard
+          securityContext:
+            capabilities:
+              add: ["NET_ADMIN", "SYS_MODULE"]
+          env:
+            - name: PEERS
+              value: "client"
+            - name: INTERNAL_SUBNET
+              value: "10.8.0.0"
+          volumeMounts:
+            - name: wg-keys
+              mountPath: /config
+      volumes:
+        - name: wg-keys
+          secret:
+            secretName: wireguard-keys

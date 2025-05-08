@@ -57,7 +57,6 @@ Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImNQRkJ2d2N6VDVFakFiUnp2ZDFWajRTazRtZGpvNzNpV
 
 ```
 
-
 ```sh
 {{ 
   $node["When chat message received"].json.chatInput + ":\n\n" + 
@@ -106,7 +105,6 @@ Containers Usage Memory:
 
 ```
 
-
 ## Mount local files to Minikube and use them in n8n
 
 ```sh
@@ -117,4 +115,34 @@ or run this in the background:
 
 ```sh
  minikube mount /home/rootster/Documents/automations/:/automations/ &
+```
+
+## WireGuard Setup
+
+### Generate Server Keys
+
+```sh
+wg genkey | tee server.key | wg pubkey > server.pub
+```
+
+### Generate Client Keys
+
+```sh
+wg genkey | tee client.key | wg pubkey > client.pub
+```
+
+Move `wg0` to `/etc/wireguard/`
+
+```sh
+[Interface]
+PrivateKey = private_key
+Address = 10.8.0.2/24
+# DNS = 1.1.1.1
+Table = off
+
+[Peer]
+PublicKey = public_key
+Endpoint = 192.168.49.2:30518
+AllowedIPs = 10.244.0.0/16
+PersistentKeepalive = 25
 ```
