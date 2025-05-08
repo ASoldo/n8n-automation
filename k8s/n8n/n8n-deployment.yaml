@@ -38,7 +38,13 @@ spec:
           volumeMounts:
             - name: n8n-storage
               mountPath: /home/node/.n8n
+            - name: automations
+              mountPath: /automations
       volumes:
         - name: n8n-storage
           persistentVolumeClaim:
             claimName: n8n-pvc
+        - name: automations
+          hostPath:
+            path: /automations
+            type: Directory
