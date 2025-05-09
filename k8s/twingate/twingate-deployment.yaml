@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: twingate-connector
+  namespace: automation
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: twingate-connector
+  template:
+    metadata:
+      labels:
+        app: twingate-connector
+    spec:
+      serviceAccountName: twingate-connector
+      containers:
+        - name: connector
+          image: twingate/connector:1
+          imagePullPolicy: Always
+          env:
+            - name: TWINGATE_NETWORK
+              value: ""
+            - name: TWINGATE_ACCESS_TOKEN
+              value: ""
+            - name: TWINGATE_REFRESH_TOKEN
+              value: ""
+            - name: TWINGATE_LABEL_HOSTNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: TWINGATE_LABEL_DEPLOYED_BY
+              value: "kubernetes"
+          securityContext:
+            capabilities:
+              add: ["NET_ADMIN"]
+            privileged: true
+          volumeMounts:
+            - name: dev-net-tun
+              mountPath: /dev/net/tun
+      volumes:
+        - name: dev-net-tun
+          hostPath:
+            path: /dev/net/tun
+            type: CharDevice
+      restartPolicy: Always

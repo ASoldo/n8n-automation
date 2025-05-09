@@ -146,3 +146,17 @@ Endpoint = 192.168.49.2:30518
 AllowedIPs = 10.244.0.0/16
 PersistentKeepalive = 25
 ```
+
+
+## TwinGate
+
+| Store Tokens on secure location like BitWarden, etc...
+
+```sh
+sudo twingate setup
+
+Twingate has been started; user authentication is required for access to Resources
+To start desktop notifications, run `twingate desktop-start`.
+Alternatively, you can run `/usr/bin/twingate-notifier console` in order to receive Twingate authentication requests in the console.
+ rootster@archiebald  ~/Documents/automations/k8s   main ± 
+```
