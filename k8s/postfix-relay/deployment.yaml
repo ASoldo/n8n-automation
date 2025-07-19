@@ -13,10 +13,16 @@ spec:
       labels:
         app: postfix-relay
     spec:
+      dnsPolicy: ClusterFirst
+      dnsConfig:
+        nameservers:
+          - 8.8.8.8
+          - 1.1.1.1
       containers:
         - name: postfix-relay
           # Simple Postfix server for outgoing mail relay
-          image: instrumentisto/postfix-relay:latest
+          image: mwader/postfix-relay:latest
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 25
           env:
@@ -27,3 +33,13 @@ spec:
                 secretKeyRef:
                   name: postfix-relay-secret
                   key: smtp_user
+          readinessProbe:
+            tcpSocket:
+              port: 25
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 25
+            initialDelaySeconds: 30
+            periodSeconds: 10
