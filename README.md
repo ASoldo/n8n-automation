@@ -39,6 +39,15 @@ curl -X GET http://harbor.local:5000/v2/_catalog
 ```
 ```
 
+## Argo CD
+
+Install Argo CD into the `argocd` namespace:
+
+```bash
+kubectl apply -f k8s/argocd/namespace.yaml
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+
 ## Addon Metrics System
 
 ```sh
