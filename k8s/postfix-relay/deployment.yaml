@@ -16,7 +16,7 @@ spec:
       containers:
         - name: postfix-relay
           # Simple Postfix server for outgoing mail relay
-          image: krallin/postfix:latest
+          image: instrumentisto/postfix-relay:latest
           ports:
             - containerPort: 25
           env:
