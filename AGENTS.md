@@ -1,5 +1,9 @@
 # AGENTS.md
 
+## Plan Before Execution
+- **Create plan in format of bullet points and present user progress**
+- **Before executing something that has multiple options format it in a way that user can in one reply provide all answers**
+
 ## Global Goals
 - **Intent‑driven resources**  
   Every Kubernetes manifest should declare clear intent (e.g. “n8n web UI”, “PostgreSQL data store”).  
