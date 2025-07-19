@@ -4,6 +4,39 @@
 
 ```sh
 minikube addons enable ingress
+```sh
+
+## Docker Registry on Minikube
+
+Deploy a simple Docker registry (registry:2) with persistent storage and Ingress:
+
+```sh
+kubectl apply -f k8s/harbor/namespace.yaml \
+              -f k8s/harbor/registry-pvc.yaml \
+              -f k8s/harbor/registry-deployment.yaml \
+              -f k8s/harbor/registry-service.yaml \
+              -f k8s/harbor/registry-ingress.yaml
+```
+
+Optionally add the following to `/etc/hosts` so `harbor.local` resolves to Minikube:
+
+```sh
+echo "$(minikube ip) harbor.local" | sudo tee -a /etc/hosts
+```
+
+You can then login and push images using Podman:
+
+```sh
+podman login harbor.local
+podman tag <your-image>:<tag> harbor.local/<your-image>:<tag>
+podman push harbor.local/<your-image>:<tag>
+```
+
+To list the repositories in the registry catalog:
+
+```sh
+curl -X GET http://harbor.local:5000/v2/_catalog
+```
 ```
 
 ## Addon Metrics System
