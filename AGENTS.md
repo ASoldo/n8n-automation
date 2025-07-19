@@ -1,9 +1,9 @@
 # AGENTS.md
 
 ## Global Goals
-- 🎯 **Intent‑driven resources**  
+- **Intent‑driven resources**  
   Every Kubernetes manifest should declare clear intent (e.g. “n8n web UI”, “PostgreSQL data store”).  
-- 📖 **Documentation first**  
+- **Documentation first**  
   Whenever you add or modify a service folder, link to the relevant upstream docs (e.g. Minikube, Helm charts, official k8s API) in the folder’s `README.md`.
 
 ## Repository Layout
@@ -38,4 +38,9 @@
 
 ## PR / Commit Guidelines
 - **Format**:  
+  [<service>] <short summary>
+
+  What changed
+
+  Why it’s needed
 
