@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postfix-relay
+  namespace: mail-relay
+spec:
+  type: ClusterIP
+  selector:
+    app: postfix-relay
+  ports:
+    - port: 25
+      targetPort: 25
+      protocol: TCP

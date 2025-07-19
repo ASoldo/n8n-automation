@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postfix-relay
+  namespace: mail-relay
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postfix-relay
+  template:
+    metadata:
+      labels:
+        app: postfix-relay
+    spec:
+      containers:
+        - name: postfix-relay
+          # Simple Postfix server for outgoing mail relay
+          image: krallin/postfix:latest
+          ports:
+            - containerPort: 25
+          env:
+            - name: maildomain
+              value: example.com
+            - name: smtp_user
+              valueFrom:
+                secretKeyRef:
+                  name: postfix-relay-secret
+                  key: smtp_user
