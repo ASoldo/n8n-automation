@@ -18,17 +18,17 @@
 - **Namespaces**: match folder name, e.g. `namespace: n8n`, `namespace: harbor`
 
 ## YAML Quality & Linting
-- ✅ Run `kubectl apply --dry-run=client -f <folder>/` on every change.  
-- ✅ Lint YAML with `yamllint --config-file .yamllint.yml` (requires two-space indent, no tabs).  
-- ✅ Validate against Kubernetes schemas via `kubeval --kubernetes-version="1.28.0"`.
+- Run `kubectl apply --dry-run=client -f <folder>/` on every change.  
+- Lint YAML with `yamllint --config-file .yamllint.yml` (requires two-space indent, no tabs).  
+- Validate against Kubernetes schemas via `kubeval --kubernetes-version="1.28.0"`.
 
 ## Deployment & Testing
-- 🚀 **Minikube smoke tests**:  
+- **Minikube smoke tests**:  
   1. `minikube start`  
   2. `kubectl apply -f k8s/_root/namespace.yaml`  
   3. `for svc in harbor n8n nginx-protected ollama postfix-relay postgres twingate wireguard; do`  
      `kubectl apply -f k8s/$svc && kubectl rollout status deploy/$svc; done`  
-- 🧪 **Health checks**:  
+- **Health checks**:  
   - Ensure each Service has a corresponding `readinessProbe` and `livenessProbe`.  
   - HTTP services must return `2xx` on `/healthz` or equivalent endpoint.
 
