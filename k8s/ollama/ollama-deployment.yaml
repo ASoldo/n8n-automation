@@ -43,6 +43,12 @@ metadata:
   namespace: automation
 spec:
   replicas: 1
+  revisionHistoryLimit: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
   selector:
     matchLabels:
       app: ollama
@@ -57,13 +63,6 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 11434
-          resources:
-            requests:
-              cpu: "4"
-              memory: "6Gi"
-            limits:
-              cpu: "8"
-              memory: "12Gi"
           volumeMounts:
             - name: ollama-data
               mountPath: /root/.ollama
@@ -86,4 +85,3 @@ spec:
         - name: ollama-data
           persistentVolumeClaim:
             claimName: ollama-pvc
-

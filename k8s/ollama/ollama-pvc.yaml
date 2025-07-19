@@ -5,9 +5,9 @@ metadata:
   namespace: automation
   name: ollama-pvc
 spec:
+  storageClassName: standard
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 5Gi
-
