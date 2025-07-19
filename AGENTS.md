@@ -39,8 +39,6 @@
 ## PR / Commit Guidelines
 - **Format**:  
   [<service>] <short summary>
-
   What changed
-
   Why it’s needed
 
