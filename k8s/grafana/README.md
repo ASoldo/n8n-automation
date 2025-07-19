@@ -20,3 +20,9 @@ kubectl apply -f k8s/_root/namespace.yaml \
 Then access Grafana at http://grafana.local:3000/.
 
 Optionally add `grafana.local:port` to your `/etc/hosts` pointing to your cluster IP.
+
+## Credentials
+```sh
+user: admin
+password: "TT1!"
+```
