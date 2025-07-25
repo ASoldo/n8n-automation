@@ -1,5 +1,5 @@
 # AGENTS.md
-
+ 
 ## Plan Before Execution
 - **Create plan in format of bullet points and present user progress**
 - **Before executing something that has multiple options format it in a way that user can in one reply provide all answers**
